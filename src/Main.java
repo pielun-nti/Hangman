@@ -1,7 +1,6 @@
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.LinkedTransferQueue;
 
@@ -17,8 +16,11 @@ public class Main {
 
     static void Intro() {
         try {
-            System.out.println("Welcome select option");
-            System.out.println("1 - vs pc");
+            System.out.print("* * * * * * * * * * * * * * *"
+                    + "\n*    Welcome to Hangman!    *"
+                    + "\n*    Select option          *"
+                    + "\n* * * * * * * * * * * * * * *");
+            System.out.println("\n" + "1 - vs pc");
             System.out.println("2 - vs human");
             Scanner in = new Scanner(System.in);
 
@@ -59,21 +61,21 @@ public class Main {
 
             String word = in.nextLine();
 
-            if (word.contains(correctword) & (attempt != 5)) {
+            if (word.contains(correctword)) {
                 System.out.println("You guessed right the word was: " + word);
-                int Attemptleft = 4 - attempt;
+                int Attemptleft = 10 - attempt;
                 System.out.println("You had " + Attemptleft + " tries left");
                 System.out.println("Type 1 to play again or 2 to exit");
                 int number = in.nextInt();
                 if (number == 1) {
                     Intro();
                 }
-                else if (number == 2) {
+                else if (number == 2 & attempt != 9) {
                     System.out.println("Exiting");
-                } else if (number != 1 & number != 2) {
+                } else if (number != 1 & number != 2 & attempt != 4) {
                     System.out.println("Incorrect choice try again");
                 }
-            } else if (attempt == 4) {
+            } else if (attempt == 9) {
                 attempt++;
                 System.out.println("Game over. you tried " + attempt + " times");
                 wrong += "---";
@@ -90,20 +92,103 @@ public class Main {
                 }
                 } else {
                     attempt++;
-                    int attemptleft = 5 - attempt;
+                    int attemptleft = 10 - attempt;
                     System.out.println("Wrong guess. Attempt left: " + attemptleft);
 
-                    if (attempt >= 1 & attempt < 3) {
+                    if (attempt <= 1 & attempt < 2) {
                         //System.out.println("  |");
                         //wrong += "|||";
+                        wrong += "-------------";
+                        System.out.println(wrong);
+                    } else if (attempt >= 2 & attempt < 3) {
                         wrong += "---";
-                    } else if (attempt <= 2) {
-                        wrong += "---";
+                        System.out.println(
+                                "\n       |"
+                                + "\n       |"
+                                + "\n       |"
+                                + "\n       |"
+                                + "\n       |"
+                                + "\n       |"
+                                + "\n" + wrong);
+                    } else if (attempt >= 3 & attempt < 4) {
+                        //wrong += "---";
+                        System.out.println(
+                                        "       ------------------------"
+                                        + "\n       |"
+                                        + "\n       |"
+                                                + "\n       |"
+                                                + "\n       |"
+                                                + "\n       |"
+                                        + "\n       |"
+                                        + "\n" + wrong);
+                    } else if (attempt >= 4 & attempt < 5) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n" + wrong);
+                    } else if (attempt >= 5 & attempt < 6) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |            -----|-----"
+                                        + "\n" + wrong);
+                    } else if (attempt >= 6 & attempt < 7) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |         --------|--------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n" + wrong + "    -----|-----");
+                    } else if (attempt >= 7 & attempt < 8) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |         --------|--------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n" + wrong + "    -----|-----");
+                    } else if (attempt >= 8 & attempt < 9) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                -|-"
+                                        + "\n       |         --------|--------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n" + wrong + "    -----|-----");
+                    } else if (attempt >= 9 & attempt < 10) {
+                        //wrong += "---";
+                        System.out.println(
+                                "       ------------------------"
+                                        + "\n       |                -|-"
+                                        + "\n       |                 |"
+                                        + "\n       |         --------|--------"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n       |                 |"
+                                        + "\n" + wrong + "    -----|-----");
                     }
-                    else if (attempt >= 3 & attempt <= 5) {
-                        wrong += "---";
-                    }
-                    System.out.println(wrong);
+
                     vsPC();
                 }
 
