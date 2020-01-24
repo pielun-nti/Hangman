@@ -16,6 +16,7 @@ public class Main {
 
     static void Intro() {
         try {
+            attempt = 0;
             System.out.print("* * * * * * * * * * * * * * *"
                     + "\n*    Welcome to Hangman!    *"
                     + "\n*    Select option          *"
